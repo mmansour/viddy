@@ -8,15 +8,23 @@ class Viddy(Displayable):
     comment_count = models.IntegerField(blank=True, null=True, verbose_name="Comment Count")
     like_count = models.IntegerField(blank=True, null=True, verbose_name="Like Count")
     video_id = models.CharField(max_length=400, verbose_name="Video ID", blank=True, null=True)
+    video_source = models.CharField(max_length=400, verbose_name="Video Source", blank=True, null=True)
     thumbnail = models.CharField(max_length=400, verbose_name="Thumbnail", blank=True, null=True)
     size = models.CharField(max_length=400, verbose_name="Size", blank=True)
-    additional_instructions = models.TextField(verbose_name="Additional Notes", blank=True)
-    order_submission_status = models.CharField(max_length=40, verbose_name="Submission Status", blank=True, null=True)
+    video_description = models.TextField(verbose_name="Video Description", blank=True)
     viddy_user = models.CharField(max_length=200, verbose_name="Viddy Username", blank=True, null=True)
     viddy_user_id = models.CharField(max_length=200, verbose_name="Viddy User ID", blank=True, null=True)
     viddy_user_thumbnail = models.CharField(max_length=200, verbose_name="Viddy User", blank=True, null=True)
     viddy_user_profile = models.CharField(max_length=200, verbose_name="Viddy User Profile", blank=True, null=True)
 
-
     def __unicode__(self):
         return self.title
+
+
+#class Tag(models.Model):
+#    viddy = models.ForeignKey(Viddy, null=True, blank=True)
+#    tag = models.CharField(max_length=200, verbose_name="Tag", blank=True, null=True)
+#    tag_id = models.CharField(max_length=200, verbose_name="Tag ID", blank=True, null=True)
+#    video_id = models.CharField(max_length=200, verbose_name="Video ID", blank=True, null=True)
+
+
