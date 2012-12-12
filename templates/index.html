@@ -13,7 +13,7 @@
 
     <ul>
     {% for v in viddy %}
-    <li>{{ v.title }} - <a href="{{ v.video_source }}">(Right click and 'Save Link As')</a> </li>
+    <li>{{ v.title }}:(<em>{{ v.like_count }} likes</em>) - <a href="{{ v.video_source }}">(Right click and 'Save Link As')</a> </li>
     {% endfor %}
     </ul>
 {% endblock %}

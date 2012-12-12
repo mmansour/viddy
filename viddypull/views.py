@@ -6,6 +6,6 @@ from django import forms
 from django.http import HttpResponse, Http404, HttpResponsePermanentRedirect, HttpResponseRedirect
 
 def home(request):
-    viddy = Viddy.objects.all()
+    viddy = Viddy.objects.all().order_by('-like_count')
     return render_to_response('index.html',{"viddy":viddy},
                 context_instance=RequestContext(request))
