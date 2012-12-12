@@ -2,12 +2,18 @@
 {% load i18n %}
 
 {% block meta_title %}{% trans "Home" %}{% endblock %}
-{% block title %}{% trans "Home" %}{% endblock %}
+{% block title %}{% trans "Viddys!" %}{% endblock %}
 
 {% block breadcrumb_menu %}
-<li class="active">{% trans "Home" %}</li>
+<li class="active">{% trans "Viddys!" %}</li>
 {% endblock %}
 
 {% block main %}
-{% trans "This is the homepage." %}
+<h2>{% trans "Right click and Save Link As to get viddy source." %}</h2>
+
+    <ul>
+    {% for v in viddy %}
+    <li>{{ v.title }} - <a href="{{ v.video_source }}">(Right click and 'Save Link As')</a> </li>
+    {% endfor %}
+    </ul>
 {% endblock %}
