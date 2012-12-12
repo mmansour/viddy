@@ -10,9 +10,11 @@ class Command(BaseCommand):
     help = 'Viddy API Test'
     def handle(self, *args, **options):
 
-        #URI TO GET TAGS FOR A VIDEO                Video ID Below
+        #TAG GETTER URI TO GET TAGS FOR A VIDEO                Video ID Below
         #http://api.viddy.com/v1/media/145ca9d7-2c9f-4a02-be3e-fdc195df7a9c/tags?access_token=BVlXEefJbY-LVkDSnD2lI7398Q2a_Dn2AluKehCLAYyNXPHWUy0xCZjZOPacsG8Xa4ojjnXJuTQ3GbJVwQaEzDNBQKfVj6hdHA_2G_vcQ4RscYdhhxv19e_2f8N99wy-JM0uI4f1FfLxEsaqRBsE2SSAkQLLaHqp7ILlmyQ07z1hiAn_fRRHg3q7CRYFl3PM0&apikey=exvusk5yqyaymvqyt6zvv3fc
 
+        #UPDATER: TO GET THE LIKE COUNT FOR A VIDEOS    VIDEO ID BELOW
+        #http://api.viddy.com/v1/media/64d48814-4fbf-4b57-9039-000fa1894477?access_token=BVlXEefJbY-LVkDSnD2lI7398Q2a_Dn2AluKehCLAYyNXPHWUy0xCZjZOPacsG8Xa4ojjnXJuTQ3GbJVwQaEzDNBQKfVj6hdHA_2G_vcQ4RscYdhhxv19e_2f8N99wy-JM0uI4f1FfLxEsaqRBsE2SSAkQLLaHqp7ILlmyQ07z1hiAn_fRRHg3q7CRYFl3PM0&apikey=exvusk5yqyaymvqyt6zvv3fc
 
         payload = {
             'access_token':'BVlXEefJbY-LVkDSnD2lI7398Q2a_Dn2AluKehCLAYyNXPHWUy0xCZjZOPacsG8Xa4ojjnXJuTQ3GbJVwQaEzDNBQKfVj6hdHA_2G_vcQ4RscYdhhxv19e_2f8N99wy-JM0uI4f1FfLxEsaqRBsE2SSAkQLLaHqp7ILlmyQ07z1hiAn_fRRHg3q7CRYFl3PM0',
