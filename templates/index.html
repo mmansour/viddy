@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n mezzanine_tags %}
 
 {% block meta_title %}{% trans "Home" %}{% endblock %}
 {% block title %}{% trans "Viddys!" %}{% endblock %}
@@ -13,7 +13,9 @@
 
     <ul>
     {% for v in viddy %}
-    <li>{{ v.title }}, (<em>{{ v.like_count }} likes</em>) - <a href="{{ v.video_source }}">(Right click and 'Save Link As')</a> </li>
+    <li>{{ v.title }}, (<em>{{ v.like_count }} likes</em>) - <a href="{{ v.video_source }}">(Right click and 'Save Link As')</a>
+{#    <img src="{{ v.thumbnail }}" />#}
+    </li>
     {% endfor %}
     </ul>
 {% endblock %}

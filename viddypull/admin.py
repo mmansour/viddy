@@ -2,6 +2,9 @@ from viddypull.models import *
 from django.contrib import admin
 from mezzanine.core.admin import DisplayableAdmin
 
+class ViddyTagInline(admin.TabularInline):
+    model = Tag
+
 class ViddyAdmin(DisplayableAdmin):
 
     fieldsets = [
@@ -10,6 +13,10 @@ class ViddyAdmin(DisplayableAdmin):
         ("Published Status",            {'fields': ['status']}),
         ("Viddy",            {'fields': ['comment_count', 'like_count', 'video_id', 'video_source', 'thumbnail', 'size', 'video_description',
                                          'viddy_user', 'viddy_user_id', 'viddy_user_thumbnail', 'viddy_user_profile']}),
+    ]
+
+    inlines = [
+        ViddyTagInline,
     ]
 
 

@@ -21,10 +21,10 @@ class Viddy(Displayable):
         return self.title
 
 
-#class Tag(models.Model):
-#    viddy = models.ForeignKey(Viddy, null=True, blank=True)
-#    tag = models.CharField(max_length=200, verbose_name="Tag", blank=True, null=True)
-#    tag_id = models.CharField(max_length=200, verbose_name="Tag ID", blank=True, null=True)
-#    video_id = models.CharField(max_length=200, verbose_name="Video ID", blank=True, null=True)
+class Tag(models.Model):
+    viddy = models.ForeignKey(Viddy, verbose_name="Video", blank=True, null=True)
+    tag = models.CharField(max_length=200, verbose_name="Tag", blank=True, null=True)
+    tag_id = models.CharField(max_length=200, verbose_name="Tag ID", blank=True, null=True)
+    media_id = models.CharField(max_length=200, verbose_name="Video ID", blank=True, null=True)
 
 
