@@ -21,10 +21,6 @@ class Command(BaseCommand):
 #        jsontags = json.loads(tags.text)
 ##        pprint.pprint(jsontags.text)
 #        pprint.pprint(jsontags)
-#
-#        for count, item in enumerate(jsontags['media_tags']):
-#
-#            print 'Content - {0} Media id {1}'.format(jsontags['media_tags'][count]['content'], jsontags['media_tags'][count]['media_id'])
 
         viddy = Viddy.objects.all()
         for v in viddy:
@@ -33,27 +29,15 @@ class Command(BaseCommand):
             jsontags = json.loads(tags.text)
 
             for count, item in enumerate(jsontags['media_tags']):
-                obj, created = Tag.objects.get_or_create(viddy=v, tag=jsontags['media_tags'][count]['content'], media_id=jsontags['media_tags'][count]['media_id'], tag_id=jsontags['media_tags'][count]['tag_id'])
-                print 'Obj {0}, Created {1}, Saved Tag - {2} Media id {3}'.format(obj, created, jsontags['media_tags'][count]['content'], jsontags['media_tags'][count]['media_id'])
+                obj, created = Tag.objects.get_or_create(viddy=v,
+                                                         tag=jsontags['media_tags'][count]['content'],
+                                                         media_id=jsontags['media_tags'][count]['media_id'],
+                                                         tag_id=jsontags['media_tags'][count]['tag_id'])
+                print 'Obj {0}, Created {1}, Saved Tag - {2} Media id {3}'.format(obj, created,
+                                                                                  unicode(jsontags['media_tags'][count]['content'].encode("utf-8")),
+                                                                                  jsontags['media_tags'][count]['media_id'])
 
 
-#            try:
-#                tag = Tag.objects.get(media_id=v.video_id)
-#            except Tag.DoesNotExist:
-#                for count, item in enumerate(jsontags['media_tags']):
-#                    tag = Tag(viddy=v, tag=jsontags['media_tags'][count]['content'], media_id=jsontags['media_tags'][count]['media_id'], tag_id=jsontags['media_tags'][count]['tag_id'])
-#                    tag.save()
-#                    print 'Saved Tag - {0} Media id {1}'.format(jsontags['media_tags'][count]['content'], jsontags['media_tags'][count]['media_id'])
-
-#            tags = requests.get("http://api.viddy.com/v1/media/%s/tags" % v.video_id, params=payload)
-#            jsontags = json.loads(tags.text)
-#    #        pprint.pprint(jsontags.text)
-#    #        pprint.pprint(jsontags)
-#            v.comment_count = jsonpopular['medias'][0]['comment_count']
-#            v.like_count = jsonpopular['medias'][0]['like_count']
-#            v.save()
-#            print 'SAVED - comment count {0} - {1}'.format(jsonpopular['medias'][0]['comment_count'],
-#                                                           unicode(jsonpopular['medias'][0]['title']).encode("utf-8"))
 
 
 
