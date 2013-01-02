@@ -39,6 +39,8 @@ class Command(BaseCommand):
                     tag.save()
                     print 'Saved Tag - {0} Media id {1}'.format(jsontags['media_tags'][count]['content'], jsontags['media_tags'][count]['media_id'])
 
+        print 'Got all tags'
+
 #            tags = requests.get("http://api.viddy.com/v1/media/%s/tags" % v.video_id, params=payload)
 #            jsontags = json.loads(tags.text)
 #    #        pprint.pprint(jsontags.text)
