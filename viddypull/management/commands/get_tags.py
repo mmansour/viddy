@@ -31,15 +31,19 @@ class Command(BaseCommand):
             time.sleep(.5)
             tags = requests.get("http://api.viddy.com/v1/media/{0}/tags".format(v.video_id), params=payload)
             jsontags = json.loads(tags.text)
-            try:
-                tag = Tag.objects.get(media_id=v.video_id)
-            except Tag.DoesNotExist:
-                for count, item in enumerate(jsontags['media_tags']):
-                    tag = Tag(viddy=v, tag=jsontags['media_tags'][count]['content'], media_id=jsontags['media_tags'][count]['media_id'], tag_id=jsontags['media_tags'][count]['tag_id'])
-                    tag.save()
-                    print 'Saved Tag - {0} Media id {1}'.format(jsontags['media_tags'][count]['content'], jsontags['media_tags'][count]['media_id'])
 
-        print 'Got all tags'
+            for count, item in enumerate(jsontags['media_tags']):
+                obj, created = Tag.objects.get_or_create(viddy=v, tag=jsontags['media_tags'][count]['content'], media_id=jsontags['media_tags'][count]['media_id'], tag_id=jsontags['media_tags'][count]['tag_id'])
+                print 'Obj {0}, Created {1}, Saved Tag - {2} Media id {3}'.format(obj, created, jsontags['media_tags'][count]['content'], jsontags['media_tags'][count]['media_id'])
+
+
+#            try:
+#                tag = Tag.objects.get(media_id=v.video_id)
+#            except Tag.DoesNotExist:
+#                for count, item in enumerate(jsontags['media_tags']):
+#                    tag = Tag(viddy=v, tag=jsontags['media_tags'][count]['content'], media_id=jsontags['media_tags'][count]['media_id'], tag_id=jsontags['media_tags'][count]['tag_id'])
+#                    tag.save()
+#                    print 'Saved Tag - {0} Media id {1}'.format(jsontags['media_tags'][count]['content'], jsontags['media_tags'][count]['media_id'])
 
 #            tags = requests.get("http://api.viddy.com/v1/media/%s/tags" % v.video_id, params=payload)
 #            jsontags = json.loads(tags.text)
