@@ -24,8 +24,11 @@ class Command(BaseCommand):
             jsonpopular = json.loads(popular.text)
     #        pprint.pprint(popular.text)
     #        pprint.pprint(jsonpopular)
-            v.comment_count = jsonpopular['medias'][0]['comment_count']
-            v.like_count = jsonpopular['medias'][0]['like_count']
+            try:
+                v.comment_count = jsonpopular['medias'][0]['comment_count']
+                v.like_count = jsonpopular['medias'][0]['like_count']
+            except KeyError, e:
+                print "{0} is throwing KeyError.".format(v.title)
             v.save()
             print 'SAVED - comment count {0} - {1}'.format(jsonpopular['medias'][0]['comment_count'],
                                                            unicode(jsonpopular['medias'][0]['title']).encode("utf-8"))
