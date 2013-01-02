@@ -38,6 +38,8 @@ class Command(BaseCommand):
                         unicode(jsontags['media_tags'][count]['content']).encode("utf-8"),
                         jsontags['media_tags'][count]['media_id'])
 
+        print 'Got all tags'
+
 
 
 

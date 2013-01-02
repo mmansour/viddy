@@ -33,6 +33,8 @@ class Command(BaseCommand):
             except KeyError, e:
                 print "{0} is throwing KeyError.".format(v.title)
 
+        print 'Updated all viddys'
+
 
 
 

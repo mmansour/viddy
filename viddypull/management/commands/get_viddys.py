@@ -56,6 +56,8 @@ class Command(BaseCommand):
                 )
                 vid.save()
 
+        print 'Got all viddys for today'
+
 
 
 
