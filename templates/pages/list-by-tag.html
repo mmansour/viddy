@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load mezzanine_tags keyword_tags %}
+
+{% block meta_title %}Viddy by tag{% endblock %}
+
+{#{% block meta_keywords %}{% metablock %}#}
+{#{% keywords_for page as keywords %}#}
+{#{% for keyword in keywords %}#}
+{#    {% if not forloop.first %}, {% endif %}#}
+{#    {{ keyword }}#}
+{#{% endfor %}#}
+{#{% endmetablock %}{% endblock %}#}
+
+{#{% block meta_description %}{% metablock %}#}
+{#{{ page.description }}#}
+{#{% endmetablock %}{% endblock %}#}
+
+{% block title %}
+Viddys by tag: <em>{{ tag.object_list.0.tag }}</em>
+{% endblock %}
+
+{% block extra_css %}
+     <style>
+        #viddylist img{width: 230px; height: 200px; clear:both;}
+        #viddylist li{float:left; list-style: none; padding: 7px;}
+        #viddypaging{clear:left;}
+        .middle h6{margin:0;}
+    </style>
+{% endblock %}
+
+{% block main %}
+
+    <h3>Right click and "<em>Save Link As</em>" to get viddy source.</h3>
+    <div id="viddylist">
+    <ul>
+    {% for t in tag.object_list %}
+    <li><h6>{{ t.viddy.title|truncatechars:27 }}</h6>
+        <span class="stats">(<em>{{ t.viddy.like_count }} likes</em> | <em>{{ t.viddy.comment_count }} comments</em>)</span>
+        <br /><a href="/details/{{ t.viddy.id }}/">Viddy details</a> <br /> <a href="{{ t.viddy.video_source }}">Get Source: (Right click and 'Save Link As')</a>
+    <br /><a href="{{ t.viddy.video_source }}"><img src="{{ t.viddy.thumbnail }}" alt="{{ t.viddy.title|truncatechars:27 }}"/></a></li>
+    {% endfor %}
+    </ul>
+    </div>
+    <div id="viddypaging">
+        {% pagination_for tag %}
+    </div>
+    
+{% endblock %}
+
+{% block right %}
+    <ul>
+    <li><a href="?sortby=-viddy__like_count">Sort by Most Liked</a></li>
+    <li><a href="?sortby=-viddy__comment_count">Sort by Most Commented</a></li>
+    </ul>
+
+    list of most popular tags
+
+{% endblock %}

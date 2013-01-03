@@ -2,20 +2,60 @@
 {% load i18n mezzanine_tags %}
 
 {% block meta_title %}{% trans "Home" %}{% endblock %}
-{% block title %}{% trans "Viddys!" %}{% endblock %}
+{% block title %}
+    {% if request.GET.sortby == "-like_count" %}
+        {% trans "Most Liked Viddys!" %}
+    {% endif %}
+
+    {% if request.GET.sortby == "-comment_count" %}
+        {% trans "Most Commented Viddys!" %}
+    {% endif %}
+
+        
+
+{% endblock %}
 
 {% block breadcrumb_menu %}
 <li class="active">{% trans "Viddys!" %}</li>
 {% endblock %}
+{% block extra_css %}
+    <style>
+        #viddylist img{width: 230px; height: 200px; clear:both;}
+        #viddylist li{float:left; list-style: none; padding: 7px;}
+        #viddypaging{clear:left;}
+        .middle h6{margin:0;}
+    </style>
+{% endblock %}
+
 
 {% block main %}
-<h2>Right click and "<em>Save Link As</em>" to get viddy source.</h2>
-
+<h3>Right click and "<em>Save Link As</em>" to get viddy source.</h3>
+    <div id="viddylist">
     <ul>
-    {% for v in viddy %}
-    <li>{{ v.title }}, (<em>{{ v.like_count }} likes</em>) - <a href="{{ v.video_source }}">(Right click and 'Save Link As')</a>
-{#    <img src="{{ v.thumbnail }}" />#}
-    </li>
+    {% for v in viddy.object_list %}
+    <li><h6>{{ v.title|truncatechars:27 }}</h6>
+        <span class="stats">(<em>{{ v.like_count }} likes</em> | <em>{{ v.comment_count }} comments</em>)</span>
+        <br /><a href="/details/{{ v.id }}/">Viddy details</a> <br /> <a href="{{ v.video_source }}">Get Source: (Right click and 'Save Link As')</a>
+    <br /><a href="{{ v.video_source }}"><img src="{{ v.thumbnail }}" alt="{{ v.title|truncatechars:27 }}"/></a></li>
+    {% endfor %}
+    </ul>
+    </div>
+    <div id="viddypaging">
+        {% pagination_for viddy %}
+    </div>
+{% endblock %}
+
+{% block right %}
+    <h6>Sort Viddys</h6>
+    <ul>
+    <li><a href="?sortby=-like_count">Sort by Most Liked</a></li>
+    <li><a href="?sortby=-comment_count">Sort by Most Commented</a></li>
+    </ul>
+
+    <h6>Top 100 most popular tags</h6>
+    <ul>
+    {% for t in tag_count %}
+        <li><a href="/tag/{{ t.tag_id }}/">{{ t.tag }}</a>: {{ t.tcount }} Viddys</li>
     {% endfor %}
     </ul>
 {% endblock %}

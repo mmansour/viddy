@@ -17,6 +17,10 @@ class Viddy(Displayable):
     viddy_user_thumbnail = models.CharField(max_length=200, verbose_name="Viddy User", blank=True, null=True)
     viddy_user_profile = models.CharField(max_length=200, verbose_name="Viddy User Profile", blank=True, null=True)
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('viddypull.views.viddy_details', [self.id])
+
     def __unicode__(self):
         return self.title
 

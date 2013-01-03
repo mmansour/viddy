@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load mezzanine_tags keyword_tags %}
+
+{% block meta_title %}Viddy Details Page{% endblock %}
+
+{#{% block meta_keywords %}{% metablock %}#}
+{#{% keywords_for page as keywords %}#}
+{#{% for keyword in keywords %}#}
+{#    {% if not forloop.first %}, {% endif %}#}
+{#    {{ keyword }}#}
+{#{% endfor %}#}
+{#{% endmetablock %}{% endblock %}#}
+
+{#{% block meta_description %}{% metablock %}#}
+{#{{ page.description }}#}
+{#{% endmetablock %}{% endblock %}#}
+
+{% block title %}
+{{ viddy.title }} (View on browsers: Chrome,  Safari, or IE 9+)
+{% endblock %}
+
+{% block extra_css %}
+    <style>
+        #viddy video{margin: -50px 0 0 0; width:450px; height:388px;}
+        #stats{float:left; margin: 30px 0 0 17px;}
+        #viddy{float:left;}
+        #get_source{clear:both; float:left;}
+        .viddy_tags{list-style: none; display: inline; margin: 0 0 0 0; clear:both; float:left;}
+        .viddy_tags li{display: inline;}
+        .viddy_tags a{border: 1px solid #555; padding: 7px; line-height: 37px;}
+    </style>
+{% endblock %}
+
+{% block main %}
+<div id="viddy">
+    <video autoplay="autoplay" controls="controls">
+    <source src="{{ viddy.video_source }}" type="video/mp4">
+    Your browser does not support the video tag.
+    </video>
+</div>
+<div id="stats">
+    <h4><img src="{{ viddy.viddy_user_thumbnail }}" /> <br />Added by: <a href="http://www.viddy.com/{{ viddy.viddy_user }}" target="_blank">{{ viddy.viddy_user }}</a></h4>
+    <h4>Stats for this Viddy:</h4>
+    <ul>
+    <li>Likes: {{ viddy.like_count }}</li>
+    <li>Comments: {{ viddy.comment_count }}</li>
+    </ul>
+</div>
+
+<div id="get_source">
+    <h6><a href="{{ viddy.video_source }}">Get Source: (Right click HERE and 'Save Link As')</a></h6>
+</div>
+
+{% if viddy.tag_set.count > 0 %}
+<ul class='viddy_tags'>
+    <li><strong>TAGS: </strong></li>
+    {% for tag in viddy.tag_set.all %}
+    <li><a href="/tag/{{ tag.tag_id }}/">{{ tag.tag }}</a></li>
+    {% endfor %}
+</ul>
+{% endif %}
+    
+{% endblock %}
