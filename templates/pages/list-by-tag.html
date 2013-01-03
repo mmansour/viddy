@@ -19,6 +19,11 @@
 Viddys by tag: <em>{{ tag.object_list.0.tag }}</em>
 {% endblock %}
 
+{% block breadcrumb_menu %}
+<li><a href="/">Home</a><span class="divider">/</span></li>
+<li class="active">Viddys by tag: <em>{{ tag.object_list.0.tag }}</em></li>
+{% endblock %}
+
 {% block extra_css %}
      <style>
         #viddylist img{width: 230px; height: 200px; clear:both;}
@@ -30,13 +35,13 @@ Viddys by tag: <em>{{ tag.object_list.0.tag }}</em>
 
 {% block main %}
 
-    <h3>Right click and "<em>Save Link As</em>" to get viddy source.</h3>
+    <h3>Right click and "<em>Save Link As...</em>" to get viddy source.</h3>
     <div id="viddylist">
     <ul>
     {% for t in tag.object_list %}
     <li><h6>{{ t.viddy.title|truncatechars:27 }}</h6>
         <span class="stats">(<em>{{ t.viddy.like_count }} likes</em> | <em>{{ t.viddy.comment_count }} comments</em>)</span>
-        <br /><a href="/details/{{ t.viddy.id }}/">Viddy details</a> <br /> <a href="{{ t.viddy.video_source }}">Get Source: (Right click and 'Save Link As')</a>
+        <br /><a href="/details/{{ t.viddy.id }}/">Viddy details</a> <br /> <a href="{{ t.viddy.video_source }}">Get Source: (Right click and 'Save Link As...')</a>
     <br /><a href="{{ t.viddy.video_source }}"><img src="{{ t.viddy.thumbnail }}" alt="{{ t.viddy.title|truncatechars:27 }}"/></a></li>
     {% endfor %}
     </ul>
