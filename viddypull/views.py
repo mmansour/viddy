@@ -12,7 +12,7 @@ def home(request):
     viddy = Viddy.objects.all().order_by(sort_criteria)
     viddy = paginate(viddy,
                         request.GET.get("page", 1),
-                        25, 15)
+                        25, 25)
 
     tag_count = Tag.objects.values('tag', 'tag_id').annotate(tcount=Count('tag_id')).order_by('-tcount')[:100]
 
@@ -31,6 +31,9 @@ def viddys_by_tag(request, tag_id):
     tag = Tag.objects.filter(tag_id=tag_id).order_by(sort_criteria)
     tag = paginate(tag,
                         request.GET.get("page", 1),
-                        25, 15)
-    return render_to_response('pages/list-by-tag.html',{'tag':tag,},
+                        25, 25)
+
+    tag_count = Tag.objects.values('tag', 'tag_id').annotate(tcount=Count('tag_id')).order_by('-tcount')[:100]
+
+    return render_to_response('pages/list-by-tag.html',{'tag':tag, 'tag_count':tag_count},
                 context_instance=RequestContext(request))
