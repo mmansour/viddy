@@ -29,13 +29,13 @@
 
 
 {% block main %}
-<h3>Right click and "<em>Save Link As...</em>" to get viddy source.</h3>
+<h3>Right click and "<em>Save Link As...</em>" to get Viddy source.</h3>
     <div id="viddylist">
     <ul>
     {% for v in viddy.object_list %}
     <li><h6>{{ v.title|truncatechars:27 }}</h6>
         <span class="stats">(<em>{{ v.like_count }} likes</em> | <em>{{ v.comment_count }} comments</em>)</span>
-        <br /><a href="/details/{{ v.id }}/">Viddy details</a> <br /> <a href="{{ v.video_source }}">Get Source: (Right click and 'Save Link As...')</a>
+        <br /><a href="/details/{{ v.id }}/">Viddy details</a> <br /> <a href="{{ v.video_source }}">Source: (Right click and 'Save Link As...')</a>
     <br /><a href="{{ v.video_source }}"><img src="{{ v.thumbnail }}" alt="{{ v.title|truncatechars:27 }}"/></a></li>
     {% endfor %}
     </ul>
