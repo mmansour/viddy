@@ -16,12 +16,27 @@
 {#{% endmetablock %}{% endblock %}#}
 
 {% block title %}
-Viddys by tag: <em>{{ tag.object_list.0.tag }}</em>
+Viddys by tag: <em>{{ tag.object_list.0.tag }} - </em>
+{% if request.GET.sortby == "-viddy__like_count" or not request.GET.sortby %}
+    sorted by: <em>most liked</em>
+{% endif %}
+
+{% if request.GET.sortby == "-viddy__comment_count" %}
+    sorted by: <em>most commented</em>
+{% endif %}
 {% endblock %}
 
 {% block breadcrumb_menu %}
 <li><a href="/">Home</a><span class="divider">/</span></li>
-<li class="active">Viddys by tag: <strong><em>{{ tag.object_list.0.tag }}</em></strong></li>
+<li class="active">Viddys by tag: <strong><em>{{ tag.object_list.0.tag }}</em></strong> - 
+{% if request.GET.sortby == "-viddy__like_count" or not request.GET.sortby %}
+    sorted by: <em>most liked</em>
+{% endif %}
+
+{% if request.GET.sortby == "-viddy__comment_count" %}
+    sorted by: <em>most commented</em>
+{% endif %}
+</li>
 {% endblock %}
 
 {% block extra_css %}

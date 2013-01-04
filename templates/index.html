@@ -3,20 +3,26 @@
 
 {% block meta_title %}{% trans "Home" %}{% endblock %}
 {% block title %}
-    {% if request.GET.sortby == "-like_count" %}
-        {% trans "Most Liked Viddys!" %}
+    {% if request.GET.sortby == "-like_count" or not request.GET.sortby %}
+        {% trans "sorted by most liked" %}
     {% endif %}
 
     {% if request.GET.sortby == "-comment_count" %}
-        {% trans "Most Commented Viddys!" %}
+        {% trans "sorted by most commented" %}
     {% endif %}
-
-        
-
 {% endblock %}
 
 {% block breadcrumb_menu %}
-<li class="active">{% trans "Viddys!" %}</li>
+<li><a href='/'>{% trans "Viddys!" %}</a><span class="divider">/</span></li>
+<li>
+{% if request.GET.sortby == "-like_count" or not request.GET.sortby %}
+        {% trans "sorted by most liked" %}
+    {% endif %}
+
+    {% if request.GET.sortby == "-comment_count" %}
+        {% trans "sorted by most commented" %}
+    {% endif %}
+</li>
 {% endblock %}
 {% block extra_css %}
     <style>
