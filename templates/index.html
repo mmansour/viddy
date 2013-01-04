@@ -4,11 +4,11 @@
 {% block meta_title %}{% trans "Home" %}{% endblock %}
 {% block title %}
     {% if request.GET.sortby == "-like_count" or not request.GET.sortby %}
-        {% trans "sorted by most liked" %}
+        {% trans "Viddys: sorted by most liked" %}
     {% endif %}
 
     {% if request.GET.sortby == "-comment_count" %}
-        {% trans "sorted by most commented" %}
+        {% trans "Viddys: sorted by most commented" %}
     {% endif %}
 {% endblock %}
 
