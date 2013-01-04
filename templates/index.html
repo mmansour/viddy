@@ -4,11 +4,11 @@
 {% block meta_title %}{% trans "Home" %}{% endblock %}
 {% block title %}
     {% if request.GET.sortby == "-like_count" or not request.GET.sortby %}
-        {% trans "Viddys: sorted by most liked" %}
+        Viddys: sorted by <span style="color:#222222;">most liked</span>
     {% endif %}
 
     {% if request.GET.sortby == "-comment_count" %}
-        {% trans "Viddys: sorted by most commented" %}
+        Viddys: sorted by <span style="color:#222222;">most commented</span>
     {% endif %}
 {% endblock %}
 
@@ -16,11 +16,11 @@
 <li><a href='/'>{% trans "Viddys!" %}</a><span class="divider">/</span></li>
 <li>
 {% if request.GET.sortby == "-like_count" or not request.GET.sortby %}
-        {% trans "sorted by most liked" %}
+        sorted by most liked
     {% endif %}
 
     {% if request.GET.sortby == "-comment_count" %}
-        {% trans "sorted by most commented" %}
+        sorted by most commented
     {% endif %}
 </li>
 {% endblock %}
@@ -35,7 +35,7 @@
 
 
 {% block main %}
-<h3>Right click and "<em>Save Link As...</em>" to get Viddy source.</h3>
+<h6>Right click and "<em><span style="color:#222222;">Save Link As...</span></em>" to get Viddy source.</h6>
     <div id="viddylist">
     <ul>
     {% for v in viddy.object_list %}

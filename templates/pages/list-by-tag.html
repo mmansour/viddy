@@ -16,25 +16,25 @@
 {#{% endmetablock %}{% endblock %}#}
 
 {% block title %}
-Viddys by tag: <em>{{ tag.object_list.0.tag }} - </em>
+Viddys by tag: <span style="color:#222222;">{{ tag.object_list.0.tag }} - </span>
 {% if request.GET.sortby == "-viddy__like_count" or not request.GET.sortby %}
-    sorted by: <em>most liked</em>
+    sorted by: <span style="color:#222222;">most liked</span>
 {% endif %}
 
 {% if request.GET.sortby == "-viddy__comment_count" %}
-    sorted by: <em>most commented</em>
+    sorted by: <span style="color:#222222;">most commented</span>
 {% endif %}
 {% endblock %}
 
 {% block breadcrumb_menu %}
 <li><a href="/">Home</a><span class="divider">/</span></li>
-<li class="active">Viddys by tag: <strong><em>{{ tag.object_list.0.tag }}</em></strong> - 
+<li class="active">Viddys by tag: <span style="color:#222222;">{{ tag.object_list.0.tag }}</span> -
 {% if request.GET.sortby == "-viddy__like_count" or not request.GET.sortby %}
-    sorted by: <em>most liked</em>
+    sorted by: <span style="color:#222222;">most liked</span>
 {% endif %}
 
 {% if request.GET.sortby == "-viddy__comment_count" %}
-    sorted by: <em>most commented</em>
+    sorted by: <span style="color:#222222;">most commented</span>
 {% endif %}
 </li>
 {% endblock %}
@@ -50,7 +50,7 @@ Viddys by tag: <em>{{ tag.object_list.0.tag }} - </em>
 
 {% block main %}
 
-    <h3>Right click and "<em>Save Link As...</em>" to get viddy source.</h3>
+    <h6>Right click and " <span style="color:#222222;">Save Link As...</span>" to get viddy source.</h6>
     <div id="viddylist">
     <ul>
     {% for t in tag.object_list %}
