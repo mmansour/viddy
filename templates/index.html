@@ -42,7 +42,7 @@
     <li><h6>{{ v.title|truncatechars:27 }}</h6>
         <span class="stats">(<em>{{ v.like_count }} likes</em> | <em>{{ v.comment_count }} comments</em>)</span>
         <br /><a href="/details/{{ v.id }}/">Viddy details</a> <br /> <a href="{{ v.video_source }}">Source: (Right click and 'Save Link As...')</a>
-    <br /><a href="{{ v.video_source }}"><img src="{{ v.thumbnail }}" alt="{{ v.title|truncatechars:27 }}"/></a></li>
+    <br /><a href="/details/{{ v.id }}/"><img src="{{ v.thumbnail }}" alt="{{ v.title|truncatechars:27 }}"/></a></li>
     {% endfor %}
     </ul>
     </div>
