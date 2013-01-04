@@ -19,12 +19,17 @@
 {{ viddy.title }} (View on browsers: Chrome,  Safari, or IE 9+)
 {% endblock %}
 
+{% block breadcrumb_menu %}
+<li><a href="/">Home</a><span class="divider">/</span></li>
+<li class="active">{{ viddy.title }}</li>
+{% endblock %}
+
 {% block extra_css %}
     <style>
-        #viddy video{margin: -50px 0 0 0; width:450px; height:388px;}
-        #stats{float:left; margin: 30px 0 0 17px;}
-        #viddy{float:left;}
-        #get_source{clear:both; float:left;}
+        #viddy video{margin: 0 0 0 0; width:640px; height:480px; background-color: black;}
+        #stats{float:left; margin: 0 0 0 17px;}
+        #viddy{float:left; clear:both;}
+        .get_source{clear:both; float:left;}
         .viddy_tags{list-style: none; display: inline; margin: 0 0 0 0; clear:both; float:left;}
         .viddy_tags li{display: inline;}
         .viddy_tags a{border: 1px solid #555; padding: 7px; line-height: 37px;}
@@ -32,6 +37,9 @@
 {% endblock %}
 
 {% block main %}
+<div class="get_source">
+    <h6><a href="{{ viddy.video_source }}">Source: (Right click HERE and 'Save Link As...')</a></h6>
+</div>
 <div id="viddy">
     <video autoplay="autoplay" controls="controls">
     <source src="{{ viddy.video_source }}" type="video/mp4">
@@ -47,7 +55,7 @@
     </ul>
 </div>
 
-<div id="get_source">
+<div class="get_source">
     <h6><a href="{{ viddy.video_source }}">Source: (Right click HERE and 'Save Link As...')</a></h6>
 </div>
 
