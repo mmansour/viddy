@@ -21,17 +21,21 @@ class Command(BaseCommand):
         for v in viddy:
             time.sleep(.5)
             popular = requests.get("http://api.viddy.com/v1/media/%s" % v.video_id, params=payload)
-            jsonpopular = json.loads(popular.text)
+            try:
+                jsonpopular = json.loads(popular.text)
+                try:
+                    v.comment_count = jsonpopular['medias'][0]['comment_count']
+                    v.like_count = jsonpopular['medias'][0]['like_count']
+                    v.save()
+                    print 'SAVED - comment count {0} - {1}'.format(jsonpopular['medias'][0]['comment_count'],
+                                              unicode(jsonpopular['medias'][0]['title']).encode("utf-8"))
+                except KeyError, e:
+                    print "{0} is throwing KeyError.".format(v.title)
+            except ValueError:
+                pass
     #        pprint.pprint(popular.text)
     #        pprint.pprint(jsonpopular)
-            try:
-                v.comment_count = jsonpopular['medias'][0]['comment_count']
-                v.like_count = jsonpopular['medias'][0]['like_count']
-                v.save()
-                print 'SAVED - comment count {0} - {1}'.format(jsonpopular['medias'][0]['comment_count'],
-                                          unicode(jsonpopular['medias'][0]['title']).encode("utf-8"))
-            except KeyError, e:
-                print "{0} is throwing KeyError.".format(v.title)
+
 
         print 'Updated all viddys'
 
