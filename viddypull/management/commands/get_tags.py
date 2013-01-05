@@ -26,17 +26,20 @@ class Command(BaseCommand):
         for v in viddy:
             time.sleep(.5)
             tags = requests.get("http://api.viddy.com/v1/media/{0}/tags".format(v.video_id), params=payload)
-            jsontags = json.loads(tags.text)
+            try:
+                jsontags = json.loads(tags.text)
 
-            for count, item in enumerate(jsontags['media_tags']):
-                obj, created = Tag.objects.get_or_create(viddy=v,
-                                                         tag=unicode(jsontags['media_tags'][count]['content']).encode("utf-8"),
-                                                         media_id=jsontags['media_tags'][count]['media_id'],
-                                                         tag_id=jsontags['media_tags'][count]['tag_id'])
-                print 'Obj {0}, Created {1}, Saved Tag - {2} Media id {3}'.\
-                format(obj, created,
-                        unicode(jsontags['media_tags'][count]['content']).encode("utf-8"),
-                        jsontags['media_tags'][count]['media_id'])
+                for count, item in enumerate(jsontags['media_tags']):
+                    obj, created = Tag.objects.get_or_create(viddy=v,
+                                                             tag=unicode(jsontags['media_tags'][count]['content']).encode("utf-8"),
+                                                             media_id=jsontags['media_tags'][count]['media_id'],
+                                                             tag_id=jsontags['media_tags'][count]['tag_id'])
+                    print 'Obj {0}, Created {1}, Saved Tag - {2} Media id {3}'.\
+                    format(obj, created,
+                            unicode(jsontags['media_tags'][count]['content']).encode("utf-8"),
+                            jsontags['media_tags'][count]['media_id'])
+            except ValueError:
+                pass
 
         print 'Got all tags'
 
