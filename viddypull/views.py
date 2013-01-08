@@ -6,7 +6,9 @@ from django import forms
 from django.http import HttpResponse, Http404, HttpResponsePermanentRedirect, HttpResponseRedirect
 from mezzanine.utils.views import paginate
 from django.db.models import Count
+from django.contrib.auth.decorators import login_required
 
+@login_required()
 def home(request):
     sort_criteria = request.GET.get("sortby", '-like_count')
     viddy = Viddy.objects.all().order_by(sort_criteria)
@@ -20,12 +22,14 @@ def home(request):
                 context_instance=RequestContext(request))
 
 
+@login_required()
 def viddy_details(request, viddy_id):
     viddy = Viddy.objects.get(pk=viddy_id)
     return render_to_response('pages/details.html',{"viddy":viddy},
                 context_instance=RequestContext(request))
 
 
+@login_required()
 def viddys_by_tag(request, tag_id):
     sort_criteria = request.GET.get("sortby", '-viddy__like_count')
     tag = Tag.objects.filter(tag_id=tag_id).order_by(sort_criteria)
