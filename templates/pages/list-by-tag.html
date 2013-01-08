@@ -55,6 +55,7 @@ Viddys by tag: <span style="color:#222222;">{{ tag.object_list.0.tag }} - </span
     <ul>
     {% for t in tag.object_list %}
     <li><h6>{{ t.viddy.title|truncatechars:27 }}</h6>
+        <em>{{ t.viddy.publish_date }}</em><br />
         <span class="stats">(<em>{{ t.viddy.like_count }} likes</em> | <em>{{ t.viddy.comment_count }} comments</em>)</span>
         <br /><a href="/details/{{ t.viddy.id }}/">Viddy details</a> <br /> <a href="{{ t.viddy.video_source }}">Source: (Right click and 'Save Link As...')</a>
     <br /><a href="/details/{{ t.viddy.id }}/"><img src="{{ t.viddy.thumbnail }}" alt="{{ t.viddy.title|truncatechars:27 }}"/></a></li>
